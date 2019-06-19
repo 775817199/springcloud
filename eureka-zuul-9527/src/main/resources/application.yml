@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: zuul-9527
+server:
+  port: 9527
+eureka:
+  client:
+    service-url:
+      #设置与Eureka Server交互的地址,查询服务和注册服务都需要依赖这个地址。
+      defaultZone: http://127.0.0.1:8761/eureka/,http://127.0.0.1:8762/eureka/
+zuul:
+  routes:
+    apiuser:
+      #/apiuser/开头的url请求，将转发到eureka-provider这个微服务上
+      path: /apiuser/**
+      serviceId: eureka-provider
+      #加上忽略服务后，再进行请求就必须以apiuser开头
+  ignored-services: "*"
